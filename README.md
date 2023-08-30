@@ -1,33 +1,28 @@
-# Build and Deploy: TWITTER clone with React, Tailwind, Next, Prisma, Mongo, NextAuth & Vercel (2023)
+# TWITTER clone with NEXT13 , Tailwind, Next, Prisma, Mongo, NextAuth & Vercel
 
-![Fullstack Twitter Clone (2)](https://user-images.githubusercontent.com/23248726/224405420-03112a76-250a-4283-992c-60e235170678.png)
+![Fullstack Twitter](https://github.com/nuhptr/twitter-clone-v2/assets/50306963/b2fb8829-ce7f-4dc0-b82c-8394087cbecc)
 
+This is a repository for a FullStack Twitter clone using NextJS, TailwindCSS & Prisma.
 
-This is a repository for a FullStack Twitter clone tutorial using React, NextJS, TailwindCSS & Prisma.
+There are many funcionalities such as:
 
-[VIDEO TUTORIAL](https://www.youtube.com/watch?v=ytkG7RT6SvU)
-
-[DOCKER VERSION by mandeepsingh10](https://github.com/mandeepsingh10/chwitter)
-
-We are going to learn funcionalities such as:
-
-- Authentication system
-- Notification system
-- Image Upload using Base64 strings
-- Prisma ORM with MongoDB
-- Responsive Layout
-- 1 To Many Relations (User - Post)
-- Many To Many Relations (Post - Comment)
-- Following functionality
-- Comments / Replies
-- Likes functionality
-- Vercel Deployment
+-  Authentication system
+-  Notification system
+-  Image Upload using Base64 strings
+-  Prisma ORM with MongoDB
+-  Responsive Layout
+-  1 To Many Relations (User - Post)
+-  Many To Many Relations (Post - Comment)
+-  Following functionality
+-  Comments / Replies
+-  Likes functionality
+-  Vercel Deployment
 
 ### Prerequisites
 
 **Node version 14.x**
 
-### Cloning the repository
+### Dependencies
 
 ```shell
 git clone https://github.com/AntonioErdeljac/twitter-clone.git
@@ -36,28 +31,50 @@ git clone https://github.com/AntonioErdeljac/twitter-clone.git
 ### Install packages
 
 ```shell
-npm i
+# tailwindcss, postcss, autoprefixer
+npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+
+# bcrypt (password hashing)
+npm install bcrypt && npm install @types/bcrypt
+
+# next-auth (authentication)
+npm install next-auth && npm install @next-auth/prisma-adapter
+
+# prisma (ORM)
+npm install prisma && npm install @prisma/client
+
+# react-icons (icons)
+npm install react-icons
+
+# react dropzone (image upload)
+npm install react-dropzone
+
+# react hot toast (notifications)
+npm install react-hot-toast
+
+# react spinners (loading)
+npm install react-spinners
+
+# react toastify (notifications)
+npm install react-toastify
+
+# swr (stale while revalidate)
+npm install swr
+
+# zustand (state management)
+npm install zustand
+
+# date-fns (date formatting)
+npm install date-fns
+
+# axios (http requests)
+npm install axios
 ```
 
 ### Setup .env file
-
 
 ```js
 DATABASE_URL=
 NEXTAUTH_JWT_SECRET=
 NEXTAUTH_SECRET=
 ```
-
-### Start the app
-
-```shell
-npm run dev
-```
-
-## Available commands
-
-Running commands with npm `npm run [command]`
-
-| command         | description                              |
-| :-------------- | :--------------------------------------- |
-| `dev`           | Starts a development instance of the app |
