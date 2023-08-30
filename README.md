@@ -1,6 +1,6 @@
 # TWITTER clone with NEXT13 , Tailwind, Next, Prisma, Mongo, NextAuth & Vercel
 
-![Fullstack Twitter](https://github.com/nuhptr/twitter-clone-v2/assets/50306963/b2fb8829-ce7f-4dc0-b82c-8394087cbecc)
+![Fullstack Twitter](https://github.com/nuhptr/twitter-clone-v2/assets/50306963/81ee094f-3998-4b19-b82e-af2d64e2ca9a)
 
 This is a repository for a FullStack Twitter clone using NextJS, TailwindCSS & Prisma.
 
