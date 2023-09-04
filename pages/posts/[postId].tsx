@@ -26,7 +26,7 @@ const PostView = () => {
   return (
     <>
       <Head>
-        <title>Twitter | {fetchedPost?.comments}</title>
+        <title>Twitter | Post</title>
         <meta
           name='description'
           content='Twitter for sharing events each other'

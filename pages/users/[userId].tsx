@@ -26,7 +26,7 @@ const UserView = () => {
   return (
     <>
       <Head>
-        <title>Home | {fetchedUser?.name}</title>
+        <title>Twitter | {fetchedUser?.name}</title>
         <meta
           name='description'
           content='Twitter for sharing events each other'
