@@ -6,9 +6,9 @@ import useCurrentUser from '@/hooks/use-current-user'
 import useEditModal from '@/hooks/use-edit-modal'
 import useUser from '@/hooks/use-user'
 
-import Input from '../input'
-import Modal from '../modal'
-import ImageUpload from '../image-upload'
+import Input from '../general/input'
+import Modal from '../general/modal'
+import ImageUpload from '../general/image-upload'
 
 export default function EditModal() {
   const { data: currentUser } = useCurrentUser()

@@ -5,8 +5,8 @@ import { toast } from 'react-hot-toast'
 import useLoginModal from '@/hooks/use-login-modal'
 import useRegisterModal from '@/hooks/use-register-modal'
 
-import Input from '../input'
-import Modal from '../modal'
+import Input from '../general/input'
+import Modal from '../general/modal'
 
 export default function LoginModal() {
   const loginModal = useLoginModal()
