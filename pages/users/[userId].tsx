@@ -4,7 +4,7 @@ import { ClipLoader } from 'react-spinners'
 import useUser from '@/hooks/use-user'
 
 import PostFeed from '@/components/posts/post-feed'
-import Header from '@/components/header'
+import Header from '@/components/general/header'
 import UserBio from '@/components/users/user-bio'
 import UserHero from '@/components/users/user-hero'
 import Head from 'next/head'

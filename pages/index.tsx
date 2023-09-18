@@ -1,6 +1,6 @@
 import PostFeed from '@/components/posts/post-feed'
-import Header from '@/components/header'
-import Form from '@/components/form'
+import Header from '@/components/general/header'
+import Form from '@/components/general/form'
 import Head from 'next/head'
 
 export default function Home() {

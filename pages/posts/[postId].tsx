@@ -3,8 +3,8 @@ import { ClipLoader } from 'react-spinners'
 
 import usePost from '@/hooks/use-post'
 
-import Header from '@/components/header'
-import Form from '@/components/form'
+import Header from '@/components/general/header'
+import Form from '@/components/general/form'
 import PostItem from '@/components/posts/post-item'
 import CommentFeed from '@/components/posts/comment-feed'
 import Head from 'next/head'
