@@ -1,11 +1,9 @@
-import Header from "../components/Header";
+import Header from '../components/header'
 
-const Search = () => {
-  return ( 
+export default function Search() {
+  return (
     <>
-      <Header label="Search" />
+      <Header label='Search' />
     </>
-   );
+  )
 }
- 
-export default Search;

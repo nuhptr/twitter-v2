@@ -1,34 +1,30 @@
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useCallback } from 'react'
 
-import useUser from '@/hooks/useUser';
+import useUser from '@/hooks/use-user'
 
 interface AvatarProps {
-  userId: string;
-  isLarge?: boolean;
-  hasBorder?: boolean;
+  userId: string
+  isLarge?: boolean
+  hasBorder?: boolean
 }
 
-const Avatar: React.FC<AvatarProps> = ({
-  userId,
-  isLarge,
-  hasBorder,
-}) => {
-  const router = useRouter();
+export default function Avatar({ userId, isLarge, hasBorder }: AvatarProps) {
+  const router = useRouter()
 
-  const { data: fetchedUser } = useUser(userId);
+  const { data: fetchedUser } = useUser(userId)
 
   const onClick = useCallback(
     (event: any) => {
-      event.stopPropagation();
+      event.stopPropagation()
 
-      const url = `/users/${userId}`;
+      const url = `/users/${userId}`
 
-      router.push(url);
+      router.push(url)
     },
     [router, userId]
-  );
+  )
 
   return (
     <div
@@ -53,7 +49,5 @@ const Avatar: React.FC<AvatarProps> = ({
         src={fetchedUser?.profileImage || '/images/placeholder.png'}
       />
     </div>
-  );
-};
-
-export default Avatar;
+  )
+}

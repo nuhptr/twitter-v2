@@ -1,15 +1,10 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import useUser from '@/hooks/useUser';
+import Avatar from '../avatar'
+import useUser from '@/hooks/use-user'
 
-import Avatar from '../Avatar';
-
-interface UserHeroProps {
-  userId: string;
-}
-
-const UserHero: React.FC<UserHeroProps> = ({ userId }) => {
-  const { data: fetchedUser } = useUser(userId);
+export default function UserHero({ userId }: { userId: string }) {
+  const { data: fetchedUser } = useUser(userId)
 
   return (
     <div>
@@ -27,7 +22,5 @@ const UserHero: React.FC<UserHeroProps> = ({ userId }) => {
         </div>
       </div>
     </div>
-  );
-};
-
-export default UserHero;
+  )
+}

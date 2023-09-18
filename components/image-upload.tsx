@@ -1,41 +1,36 @@
-import Image from 'next/image';
-import { useCallback, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
+import Image from 'next/image'
+import { useCallback, useState } from 'react'
+import { useDropzone } from 'react-dropzone'
 
 interface DropzoneProps {
-  onChange: (base64: string) => void;
-  label: string;
-  value?: string;
-  disabled?: boolean;
+  onChange: (base64: string) => void
+  label: string
+  value?: string
+  disabled?: boolean
 }
 
-const ImageUpload: React.FC<DropzoneProps> = ({
-  onChange,
-  label,
-  value,
-  disabled,
-}) => {
-  const [base64, setBase64] = useState(value);
+export default function ImageUpload({ onChange, label, value, disabled }: DropzoneProps) {
+  const [base64, setBase64] = useState(value)
 
   const handleChange = useCallback(
     (base64: string) => {
-      onChange(base64);
+      onChange(base64)
     },
     [onChange]
-  );
+  )
 
   const handleDrop = useCallback(
     (files: any) => {
-      const file = files[0];
-      const reader = new FileReader();
+      const file = files[0]
+      const reader = new FileReader()
       reader.onload = (event: any) => {
-        setBase64(event.target.result);
-        handleChange(event.target.result);
-      };
-      reader.readAsDataURL(file);
+        setBase64(event.target.result)
+        handleChange(event.target.result)
+      }
+      reader.readAsDataURL(file)
     },
     [handleChange]
-  );
+  )
 
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
@@ -45,7 +40,7 @@ const ImageUpload: React.FC<DropzoneProps> = ({
       'image/jpeg': [],
       'image/png': [],
     },
-  });
+  })
 
   return (
     <div
@@ -56,18 +51,11 @@ const ImageUpload: React.FC<DropzoneProps> = ({
       <input {...getInputProps()} />
       {base64 ? (
         <div className='flex items-center justify-center'>
-          <Image
-            src={base64}
-            height='100'
-            width='100'
-            alt='Uploaded image'
-          />
+          <Image src={base64} height='100' width='100' alt='Uploaded image' />
         </div>
       ) : (
         <p className='text-white'>{label}</p>
       )}
     </div>
-  );
-};
-
-export default ImageUpload;
+  )
+}

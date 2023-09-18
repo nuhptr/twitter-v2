@@ -1,32 +1,26 @@
-import { useRouter } from 'next/router';
-import { useCallback, useMemo } from 'react';
-import { formatDistanceToNowStrict } from 'date-fns';
+import { useRouter } from 'next/router'
+import { useCallback, useMemo } from 'react'
+import { formatDistanceToNowStrict } from 'date-fns'
 
-import Avatar from '../Avatar';
+import Avatar from '../avatar'
 
-interface CommentItemProps {
-  data: Record<string, any>;
-}
-
-const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
-  const router = useRouter();
+export default function CommentItem({ data = {} }: { data: Record<string, any> }) {
+  const router = useRouter()
 
   const goToUser = useCallback(
-    (ev: any) => {
-      ev.stopPropagation();
+    (event: any) => {
+      event.stopPropagation()
 
-      router.push(`/users/${data.user.id}`);
+      router.push(`/users/${data.user.id}`)
     },
     [router, data.user.id]
-  );
+  )
 
   const createdAt = useMemo(() => {
-    if (!data?.createdAt) {
-      return null;
-    }
+    if (!data?.createdAt) return null
 
-    return formatDistanceToNowStrict(new Date(data.createdAt));
-  }, [data.createdAt]);
+    return formatDistanceToNowStrict(new Date(data.createdAt))
+  }, [data.createdAt])
 
   return (
     <div
@@ -52,15 +46,11 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
               className='hidden cursor-pointer text-neutral-500 hover:underline md:block'>
               @{data.user.username}
             </span>
-            <span className='text-sm text-neutral-500'>
-              {createdAt}
-            </span>
+            <span className='text-sm text-neutral-500'>{createdAt}</span>
           </div>
           <div className='mt-1 text-white'>{data.body}</div>
         </div>
       </div>
     </div>
-  );
-};
-
-export default CommentItem;
+  )
+}
