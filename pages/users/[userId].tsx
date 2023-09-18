@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router'
 import { ClipLoader } from 'react-spinners'
 
-import useUser from '@/hooks/useUser'
+import useUser from '@/hooks/use-user'
 
-import PostFeed from '@/components/posts/PostFeed'
-import Header from '@/components/Header'
-import UserBio from '@/components/users/UserBio'
-import UserHero from '@/components/users/UserHero'
+import PostFeed from '@/components/posts/post-feed'
+import Header from '@/components/header'
+import UserBio from '@/components/users/user-bio'
+import UserHero from '@/components/users/user-hero'
 import Head from 'next/head'
 
-const UserView = () => {
+export default function UserView() {
   const router = useRouter()
   const { userId } = router.query
 
@@ -27,10 +27,7 @@ const UserView = () => {
     <>
       <Head>
         <title>Twitter | {fetchedUser?.name}</title>
-        <meta
-          name='description'
-          content='Twitter for sharing events each other'
-        />
+        <meta name='description' content='Twitter for sharing events each other' />
       </Head>
 
       <Header showBackArrow label={fetchedUser?.name} />
@@ -40,5 +37,3 @@ const UserView = () => {
     </>
   )
 }
-
-export default UserView
