@@ -1,20 +1,20 @@
-import { useCallback } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import { useCallback } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
 
-import Button from './Button';
+import Button from './button'
 
 interface ModalProps {
-  isOpen?: boolean;
-  onClose: () => void;
-  onSubmit: () => void;
-  title?: string;
-  body?: React.ReactElement;
-  footer?: React.ReactElement;
-  actionLabel: string;
-  disabled?: boolean;
+  isOpen?: boolean
+  onClose: () => void
+  onSubmit: () => void
+  title?: string
+  body?: React.ReactElement
+  footer?: React.ReactElement
+  actionLabel: string
+  disabled?: boolean
 }
 
-const Modal: React.FC<ModalProps> = ({
+export default function Modal({
   isOpen,
   onClose,
   onSubmit,
@@ -23,26 +23,20 @@ const Modal: React.FC<ModalProps> = ({
   actionLabel,
   footer,
   disabled,
-}) => {
+}: ModalProps) {
   const handleClose = useCallback(() => {
-    if (disabled) {
-      return;
-    }
+    if (disabled) return
 
-    onClose();
-  }, [onClose, disabled]);
+    onClose()
+  }, [onClose, disabled])
 
   const handleSubmit = useCallback(() => {
-    if (disabled) {
-      return;
-    }
+    if (disabled) return
 
-    onSubmit();
-  }, [onSubmit, disabled]);
+    onSubmit()
+  }, [onSubmit, disabled])
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null
 
   return (
     <>
@@ -52,9 +46,7 @@ const Modal: React.FC<ModalProps> = ({
           <div className='relative flex flex-col w-full h-full bg-black border-0 rounded-lg shadow-lg outline-none lg:h-auto focus:outline-none'>
             {/*header*/}
             <div className='flex items-center justify-between p-10 rounded-t '>
-              <h3 className='text-3xl font-semibold text-white'>
-                {title}
-              </h3>
+              <h3 className='text-3xl font-semibold text-white'>{title}</h3>
               <button
                 className='p-1 ml-auto text-white transition border-0 hover:opacity-70'
                 onClick={handleClose}>
@@ -79,7 +71,5 @@ const Modal: React.FC<ModalProps> = ({
         </div>
       </div>
     </>
-  );
-};
-
-export default Modal;
+  )
+}

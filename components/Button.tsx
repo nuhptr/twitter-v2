@@ -1,14 +1,14 @@
 interface ButtonProps {
-  label: string;
-  secondary?: boolean;
-  fullWidth?: boolean;
-  large?: boolean;
-  onClick: () => void;
-  disabled?: boolean;
-  outline?: boolean;
+  label: string
+  secondary?: boolean
+  fullWidth?: boolean
+  large?: boolean
+  onClick: () => void
+  disabled?: boolean
+  outline?: boolean
 }
 
-const Button: React.FC<ButtonProps> = ({
+export default function Button({
   label,
   secondary,
   fullWidth,
@@ -16,19 +16,14 @@ const Button: React.FC<ButtonProps> = ({
   large,
   disabled,
   outline,
-}) => {
+}: ButtonProps) {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
       className={`
-        disabled:opacity-70
-        disabled:cursor-not-allowed
-        rounded-full
-        font-semibold
-        hover:opacity-80
-        transition
-        border-2
+        disabled:opacity-70 disabled:cursor-not-allowed rounded-full 
+        font-semibold hover:opacity-80 transition border-2
         ${fullWidth ? 'w-full' : 'w-fit'}
         ${secondary ? 'bg-white' : 'bg-sky-500'}
         ${secondary ? 'text-black' : 'text-white'}
@@ -42,7 +37,5 @@ const Button: React.FC<ButtonProps> = ({
       `}>
       {label}
     </button>
-  );
-};
-
-export default Button;
+  )
+}
