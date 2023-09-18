@@ -7,7 +7,7 @@ import useLoginModal from '@/hooks/use-login-modal'
 import useCurrentUser from '@/hooks/use-current-user'
 import useLike from '@/hooks/use-like'
 
-import Avatar from '../avatar'
+import Avatar from '../general/avatar'
 
 interface PostItemProps {
   data: Record<string, any>

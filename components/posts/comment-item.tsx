@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { formatDistanceToNowStrict } from 'date-fns'
 
-import Avatar from '../avatar'
+import Avatar from '../general/avatar'
 
 export default function CommentItem({ data = {} }: { data: Record<string, any> }) {
   const router = useRouter()
