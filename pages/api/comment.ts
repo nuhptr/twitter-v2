@@ -7,7 +7,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   if (request.method !== 'POST') return response.status(405).end()
 
   try {
-    const { currentUser } = await serverAuth(request, response)
+    const currentUser = await serverAuth(request, response)
     const { body } = request.body
     const { postId } = request.query
 
