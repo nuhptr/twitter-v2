@@ -7,7 +7,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   if (request.method !== 'PATCH') return response.status(405).end()
 
   try {
-    const { currentUser } = await serverAuth(request, response)
+    const currentUser = await serverAuth(request, response)
     const { name, username, bio, profileImage, coverImage } = request.body
 
     if (!name || !username) throw new Error('Missing fields')

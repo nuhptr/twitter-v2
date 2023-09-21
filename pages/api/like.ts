@@ -7,7 +7,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   if (request.method !== 'POST' && request.method !== 'DELETE') return response.status(405).end()
 
   try {
-    const { currentUser } = await serverAuth(request, response)
+    const currentUser = await serverAuth(request, response)
     const { postId } = request.body
     if (!postId || typeof postId !== 'string') throw new Error('Invalid Post ID')
 
