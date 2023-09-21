@@ -1,6 +1,6 @@
 import useUsers from '@/hooks/use-users'
 
-import Avatar from '../general/avatar'
+import Avatar from '../avatar'
 
 export default function FollowBar() {
   const { data: users = [] } = useUsers()

@@ -6,8 +6,8 @@ import { signIn } from 'next-auth/react'
 import useLoginModal from '@/hooks/use-login-modal'
 import useRegisterModal from '@/hooks/use-register-modal'
 
-import Input from '../general/input'
-import Modal from '../general/modal'
+import Input from '../input'
+import Modal from '../modal'
 
 export default function RegisterModal() {
   const loginModal = useLoginModal()
@@ -30,7 +30,6 @@ export default function RegisterModal() {
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true)
-
       await axios.post('/api/register', { email, password, username, name })
       setIsLoading(false)
 

@@ -1,24 +1,23 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import serverAuth from '@/libs/server-auth'
-import prisma from '@/libs/prismadb'
+import serverAuth from '@/helpers/server-auth'
+import prisma from '@/helpers/prismadb'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST' && req.method !== 'GET') return res.status(405).end()
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
+  if (request.method !== 'POST' && request.method !== 'GET') return response.status(405).end()
 
   try {
-    if (req.method === 'POST') {
-      const { currentUser } = await serverAuth(req, res)
-      const { body } = req.body
+    if (request.method === 'POST') {
+      const { currentUser } = await serverAuth(request, response)
+      const { body } = request.body
 
       const post = await prisma.post.create({ data: { body, userId: currentUser.id } })
 
-      return res.status(200).json(post)
+      return response.status(200).json(post)
     }
 
-    if (req.method === 'GET') {
-      const { userId } = req.query
-      console.log({ userId })
+    if (request.method === 'GET') {
+      const { userId } = request.query
 
       let posts
 
@@ -35,10 +34,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         })
       }
 
-      return res.status(200).json(posts)
+      return response.status(200).json(posts)
     }
   } catch (error) {
     console.log(error)
-    return res.status(400).end()
+    return response.status(400).end()
   }
 }

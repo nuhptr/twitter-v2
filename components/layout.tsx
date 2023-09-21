@@ -1,5 +1,5 @@
-import Sidebar from '../layout/side-bar'
-import FollowBar from '../layout/follow-bar'
+import Sidebar from './layout/sidebar'
+import FollowBar from './layout/follow-bar'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 
-import fetcher from '@/libs/fetcher'
+import fetcher from '@/helpers/fetcher'
 
 export default function useNotifications(userId?: string) {
   const url = userId ? `/api/notifications/${userId}` : null

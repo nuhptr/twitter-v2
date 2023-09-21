@@ -5,8 +5,8 @@ import { toast } from 'react-hot-toast'
 import useLoginModal from '@/hooks/use-login-modal'
 import useRegisterModal from '@/hooks/use-register-modal'
 
-import Input from '../general/input'
-import Modal from '../general/modal'
+import Input from '../input'
+import Modal from '../modal'
 
 export default function LoginModal() {
   const loginModal = useLoginModal()
@@ -19,7 +19,6 @@ export default function LoginModal() {
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true)
-
       await signIn('credentials', { email, password })
       toast.success('Logged in')
 

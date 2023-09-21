@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import Avatar from '../general/avatar'
+import Avatar from '../avatar'
 import useUser from '@/hooks/use-user'
 
 export default function UserHero({ userId }: { userId: string }) {

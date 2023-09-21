@@ -7,7 +7,7 @@ import useUser from '@/hooks/use-user'
 import useFollow from '@/hooks/use-follow'
 import useEditModal from '@/hooks/use-edit-modal'
 
-import Button from '../general/button'
+import Button from '../button'
 
 export default function UserBio({ userId }: { userId: string }) {
   const { data: currentUser } = useCurrentUser()

@@ -13,14 +13,14 @@ export default function ImageUpload({ onChange, label, value, disabled }: Dropzo
   const [base64, setBase64] = useState(value)
 
   const handleChange = useCallback(
-    (base64: string) => {
+    function (base64: string) {
       onChange(base64)
     },
     [onChange]
   )
 
   const handleDrop = useCallback(
-    (files: any) => {
+    function (files: any) {
       const file = files[0]
       const reader = new FileReader()
       reader.onload = (event: any) => {
@@ -36,10 +36,7 @@ export default function ImageUpload({ onChange, label, value, disabled }: Dropzo
     maxFiles: 1,
     onDrop: handleDrop,
     disabled,
-    accept: {
-      'image/jpeg': [],
-      'image/png': [],
-    },
+    accept: { 'image/jpeg': [], 'image/png': [] },
   })
 
   return (

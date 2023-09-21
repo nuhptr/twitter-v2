@@ -2,10 +2,10 @@ import type { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
 import { SessionProvider } from 'next-auth/react'
 
-import Layout from '@/components/general/layout'
-import LoginModal from '@/components/modals/login-modal'
-import RegisterModal from '@/components/modals/register-modal'
-import EditModal from '@/components/modals/edit-modal'
+import Layout from '@/components/layout'
+import LoginModal from '@/components/modal/login-modal'
+import RegisterModal from '@/components/modal/register-modal'
+import EditModal from '@/components/modal/edit-modal'
 
 import '@/styles/globals.css'
 

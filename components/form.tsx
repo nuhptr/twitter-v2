@@ -31,13 +31,12 @@ export default function Form({ placeholder, isComment, postId }: FormProps) {
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true)
-
       const url = isComment ? `/api/comments?postId=${postId}` : '/api/posts'
 
       await axios.post(url, { body })
-
       toast.success('Tweet created')
       setBody('')
+
       mutatePosts()
       mutatePost()
     } catch (error) {

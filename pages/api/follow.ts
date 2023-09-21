@@ -1,37 +1,35 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import serverAuth from '@/libs/server-auth'
-import prisma from '@/libs/prismadb'
+import serverAuth from '@/helpers/server-auth'
+import prisma from '@/helpers/prismadb'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST' && req.method !== 'DELETE') return res.status(405).end()
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
+  if (request.method !== 'POST' && request.method !== 'DELETE') return response.status(405).end()
 
   try {
-    const { currentUser } = await serverAuth(req, res)
-    const { userId } = req.body
-
-    if (!userId || typeof userId !== 'string') throw new Error('Invalid ID')
+    const { currentUser } = await serverAuth(request, response)
+    const { userId } = request.body
+    if (!userId || typeof userId !== 'string') throw new Error('Invalid User ID')
 
     const user = await prisma.user.findUnique({ where: { id: userId } })
-    if (!user) throw new Error('Invalid ID')
+    if (!user) throw new Error('User Not Found')
 
     let updatedFollowingIds = [...(user.followingIds || [])]
 
-    if (req.method === 'POST') {
-      updatedFollowingIds.push(userId)
+    if (request.method === 'POST') {
+      updatedFollowingIds.push(currentUser.id)
 
-      // NOTIFICATION PART START
+      // notification to user
       try {
         await prisma.notification.create({ data: { body: 'Someone followed you!', userId } })
-
         await prisma.user.update({ where: { id: userId }, data: { hasNotification: true } })
-      } catch (error) {
-        console.log(error)
+      } catch (error: any) {
+        console.error(error)
       }
-      // NOTIFICATION PART END
+      // end notification
     }
 
-    if (req.method === 'DELETE') {
+    if (request.method === 'DELETE') {
       updatedFollowingIds = updatedFollowingIds.filter((followingId) => followingId !== userId)
     }
 
@@ -40,9 +38,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       data: { followingIds: updatedFollowingIds },
     })
 
-    return res.status(200).json(updatedUser)
-  } catch (error) {
-    console.log(error)
-    return res.status(400).end()
+    return response.status(200).json(updatedUser)
+  } catch (error: any) {
+    console.error(error)
+    return response.status(400).end()
   }
 }

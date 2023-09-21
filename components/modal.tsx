@@ -26,13 +26,11 @@ export default function Modal({
 }: ModalProps) {
   const handleClose = useCallback(() => {
     if (disabled) return
-
     onClose()
   }, [onClose, disabled])
 
   const handleSubmit = useCallback(() => {
     if (disabled) return
-
     onSubmit()
   }, [onSubmit, disabled])
 

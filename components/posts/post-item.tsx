@@ -7,7 +7,7 @@ import useLoginModal from '@/hooks/use-login-modal'
 import useCurrentUser from '@/hooks/use-current-user'
 import useLike from '@/hooks/use-like'
 
-import Avatar from '../general/avatar'
+import Avatar from '../avatar'
 
 interface PostItemProps {
   data: Record<string, any>
@@ -24,7 +24,6 @@ export default function PostItem({ data = {}, userId }: PostItemProps) {
   const goToUser = useCallback(
     (event: any) => {
       event.stopPropagation()
-
       router.push(`/users/${data.user.id}`)
     },
     [router, data.user.id]
@@ -37,7 +36,6 @@ export default function PostItem({ data = {}, userId }: PostItemProps) {
   const onLike = useCallback(
     async (event: any) => {
       event.stopPropagation()
-
       if (!currentUser) return loginModal.onOpen()
       toggleLike()
     },

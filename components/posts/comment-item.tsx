@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { formatDistanceToNowStrict } from 'date-fns'
 
-import Avatar from '../general/avatar'
+import Avatar from '../avatar'
 
 export default function CommentItem({ data = {} }: { data: Record<string, any> }) {
   const router = useRouter()
@@ -10,7 +10,6 @@ export default function CommentItem({ data = {} }: { data: Record<string, any> }
   const goToUser = useCallback(
     (event: any) => {
       event.stopPropagation()
-
       router.push(`/users/${data.user.id}`)
     },
     [router, data.user.id]

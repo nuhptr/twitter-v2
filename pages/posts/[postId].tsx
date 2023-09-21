@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 import { ClipLoader } from 'react-spinners'
+import Head from 'next/head'
 
 import usePost from '@/hooks/use-post'
 
-import Header from '@/components/general/header'
-import Form from '@/components/general/form'
+import Header from '@/components/header'
+import Form from '@/components/form'
 import PostItem from '@/components/posts/post-item'
 import CommentFeed from '@/components/posts/comment-feed'
-import Head from 'next/head'
 
 export default function PostView() {
   const router = useRouter()

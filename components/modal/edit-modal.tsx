@@ -6,9 +6,9 @@ import useCurrentUser from '@/hooks/use-current-user'
 import useEditModal from '@/hooks/use-edit-modal'
 import useUser from '@/hooks/use-user'
 
-import Input from '../general/input'
-import Modal from '../general/modal'
-import ImageUpload from '../general/image-upload'
+import Input from '../input'
+import Modal from '../modal'
+import ImageUpload from '../image-upload'
 
 export default function EditModal() {
   const { data: currentUser } = useCurrentUser()
@@ -40,12 +40,10 @@ export default function EditModal() {
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true)
-
       await axios.patch('/api/edit', { name, username, bio, profileImage, coverImage })
       mutateFetchedUser()
 
       toast.success('Updated')
-
       editModal.onClose()
     } catch (error) {
       toast.error('Something went wrong')

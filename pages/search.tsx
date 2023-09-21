@@ -1,4 +1,4 @@
-import Header from '@/components/general/header'
+import Header from '@/components/header'
 
 export default function Search() {
   return (

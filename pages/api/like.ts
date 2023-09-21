@@ -1,57 +1,52 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import serverAuth from '@/libs/server-auth'
-import prisma from '@/libs/prismadb'
+import serverAuth from '@/helpers/server-auth'
+import prisma from '@/helpers/prismadb'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST' && req.method !== 'DELETE') return res.status(405).end()
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
+  if (request.method !== 'POST' && request.method !== 'DELETE') return response.status(405).end()
 
   try {
-    const { currentUser } = await serverAuth(req, res)
-    const { postId } = req.body
-
-    if (!postId || typeof postId !== 'string') throw new Error('Invalid ID')
+    const { currentUser } = await serverAuth(request, response)
+    const { postId } = request.body
+    if (!postId || typeof postId !== 'string') throw new Error('Invalid Post ID')
 
     const post = await prisma.post.findUnique({ where: { id: postId } })
-    if (!post) throw new Error('Invalid ID')
+    if (!post) throw new Error('Post Not Found')
 
-    let updatedLikedIds = [...(post.likedIds || [])]
+    let updatedLikeIds = [...(post.likedIds || [])]
 
-    if (req.method === 'POST') {
-      updatedLikedIds.push(currentUser.id)
+    if (request.method === 'POST') {
+      updatedLikeIds.push(currentUser.id)
 
-      // NOTIFICATION PART START
+      // TODO: Send notification to post author
       try {
         const post = await prisma.post.findUnique({ where: { id: postId } })
 
         if (post?.userId) {
           await prisma.notification.create({
-            data: { body: 'Someone liked your tweet!', userId: post.userId },
+            data: { body: 'Someone liked your post!', userId: post.userId },
           })
 
-          await prisma.user.update({
-            where: { id: post.userId },
-            data: { hasNotification: true },
-          })
+          await prisma.user.update({ where: { id: post.userId }, data: { hasNotification: true } })
         }
-      } catch (error) {
-        console.log(error)
+      } catch (error: any) {
+        console.error(error)
       }
-      // NOTIFICATION PART END
     }
 
-    if (req.method === 'DELETE') {
-      updatedLikedIds = updatedLikedIds.filter((likedId) => likedId !== currentUser?.id)
+    if (request.method === 'DELETE') {
+      updatedLikeIds = updatedLikeIds.filter((likeId) => likeId !== currentUser.id)
     }
 
     const updatedPost = await prisma.post.update({
       where: { id: postId },
-      data: { likedIds: updatedLikedIds },
+      data: { likedIds: updatedLikeIds },
     })
 
-    return res.status(200).json(updatedPost)
-  } catch (error) {
+    return response.status(200).json(updatedPost)
+  } catch (error: any) {
     console.log(error)
-    return res.status(400).end()
+    return response.status(400).end()
   }
 }
