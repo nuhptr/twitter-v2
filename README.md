@@ -2,8 +2,6 @@
 
 ![Fullstack Twitter](https://github.com/nuhptr/twitter-clone-v2/assets/50306963/81ee094f-3998-4b19-b82e-af2d64e2ca9a)
 
-This is a repository for a FullStack Twitter clone using NextJS, TailwindCSS & Prisma.
-
 There are many funcionalities such as:
 
 - Authentication system
