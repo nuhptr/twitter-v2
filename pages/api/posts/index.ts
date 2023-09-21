@@ -8,7 +8,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
   try {
     if (request.method === 'POST') {
-      const { currentUser } = await serverAuth(request, response)
+      const currentUser = await serverAuth(request, response)
       const { body } = request.body
 
       const post = await prisma.post.create({ data: { body, userId: currentUser.id } })
