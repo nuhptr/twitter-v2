@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-
-import { options } from '@/pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
 
+import { options } from '@/pages/api/auth/[...nextauth]'
 import prisma from '@/helpers/prismadb'
 
 export default async function serverAuth(request: NextApiRequest, response: NextApiResponse) {
