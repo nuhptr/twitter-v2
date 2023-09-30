@@ -38,8 +38,7 @@ There are many funcionalities such as:
 
 ### Setup .env file
 
-```bash
-DATABASE_URL=
-NEXTAUTH_JWT_SECRET=
-NEXTAUTH_SECRET=
-```
+- DATABASE_URL=
+- NEXTAUTH_JWT_SECRET=(up to you)
+- NEXTAUTH_SECRET=(up to you)
+
