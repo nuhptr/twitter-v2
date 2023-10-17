@@ -10,15 +10,15 @@ import EditModal from '@/components/modal/edit-modal'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <SessionProvider session={pageProps.session}>
-      <Toaster />
-      <RegisterModal />
-      <LoginModal />
-      <EditModal />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </SessionProvider>
-  )
+   return (
+      <SessionProvider session={pageProps.session}>
+         <Toaster />
+         <RegisterModal />
+         <LoginModal />
+         <EditModal />
+         <Layout>
+            <Component {...pageProps} />
+         </Layout>
+      </SessionProvider>
+   )
 }

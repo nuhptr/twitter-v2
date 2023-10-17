@@ -7,35 +7,35 @@ import useLoginModal from './use-login-modal'
 import useUser from './use-user'
 
 export default function useFollow(userId: string) {
-  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser()
-  const { mutate: mutateFetchedUser } = useUser(userId)
+   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser()
+   const { mutate: mutateFetchedUser } = useUser(userId)
 
-  const loginModal = useLoginModal()
+   const loginModal = useLoginModal()
 
-  const isFollowing = useMemo(() => {
-    const list = currentUser?.followingIds || []
+   const isFollowing = useMemo(() => {
+      const list = currentUser?.followingIds || []
 
-    return list.includes(userId)
-  }, [currentUser, userId])
+      return list.includes(userId)
+   }, [currentUser, userId])
 
-  const toggleFollow = useCallback(async () => {
-    if (!currentUser) return loginModal.onOpen()
+   const toggleFollow = useCallback(async () => {
+      if (!currentUser) return loginModal.onOpen()
 
-    try {
-      let request
+      try {
+         let request
 
-      if (isFollowing) request = () => axios.delete('/api/follow', { data: { userId } })
-      else request = () => axios.post('/api/follow', { userId })
+         if (isFollowing) request = () => axios.delete('/api/follow', { data: { userId } })
+         else request = () => axios.post('/api/follow', { userId })
 
-      await request()
-      mutateCurrentUser()
-      mutateFetchedUser()
+         await request()
+         mutateCurrentUser()
+         mutateFetchedUser()
 
-      toast.success('Success')
-    } catch (error) {
-      toast.error('Something went wrong')
-    }
-  }, [currentUser, isFollowing, userId, mutateCurrentUser, mutateFetchedUser, loginModal])
+         toast.success('Success')
+      } catch (error) {
+         toast.error('Something went wrong')
+      }
+   }, [currentUser, isFollowing, userId, mutateCurrentUser, mutateFetchedUser, loginModal])
 
-  return { isFollowing, toggleFollow }
+   return { isFollowing, toggleFollow }
 }
