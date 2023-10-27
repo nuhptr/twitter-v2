@@ -43,5 +43,6 @@ There are many funcionalities such as:
 
 ### Package Install
 
--  Use `npm install --legacy-peer-deps` to install all dependencies
+-  Use `npm install --legacy-peer-deps` to install all dependencies if use next14
+-  next-auth not support next14 yet
 -  delete `package-lock.json` and node_modules folder if you have any issues
