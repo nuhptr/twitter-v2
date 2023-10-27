@@ -14,7 +14,6 @@ There are many funcionalities such as:
 -  Following functionality
 -  Comments / Replies
 -  Likes functionality
--  Vercel Deployment
 
 ### Prerequisites
 
