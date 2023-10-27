@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { useCallback } from 'react'
+import Image from "next/image"
+import { useRouter } from "next/router"
+import { useCallback } from "react"
 
-import useUser from '@/hooks/use-user'
+import useUser from "@/hooks/use-user"
 
 interface AvatarProps {
    userId: string
@@ -27,15 +27,15 @@ export default function Avatar({ userId, isLarge, hasBorder }: AvatarProps) {
 
    return (
       <div
-         className={`${hasBorder ? 'border-4 border-black' : ''} ${isLarge ? 'h-32' : 'h-12'}
-      ${isLarge ? 'w-32' : 'w-12'} rounded-full hover:opacity-90 transition cursor-pointer relative
+         className={`${hasBorder ? "border-4 border-black" : ""} ${isLarge ? "h-32" : "h-12"}
+      ${isLarge ? "w-32" : "w-12"} rounded-full hover:opacity-90 transition cursor-pointer relative
       `}>
          <Image
             fill
-            style={{ objectFit: 'cover', borderRadius: '100%' }}
-            alt='Avatar'
+            style={{ objectFit: "cover", borderRadius: "100%" }}
+            alt="Avatar"
             onClick={onClick}
-            src={fetchedUser?.profileImage || '/images/placeholder.png'}
+            src={fetchedUser?.profileImage || "/images/placeholder.png"}
          />
       </div>
    )

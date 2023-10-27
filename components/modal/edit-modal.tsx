@@ -1,25 +1,25 @@
-import axios from 'axios'
-import { useCallback, useEffect, useState } from 'react'
-import { toast } from 'react-hot-toast'
+import axios from "axios"
+import { useCallback, useEffect, useState } from "react"
+import { toast } from "react-hot-toast"
 
-import useCurrentUser from '@/hooks/use-current-user'
-import useEditModal from '@/hooks/use-edit-modal'
-import useUser from '@/hooks/use-user'
+import useCurrentUser from "@/hooks/use-current-user"
+import useEditModal from "@/hooks/use-edit-modal"
+import useUser from "@/hooks/use-user"
 
-import Input from '../input'
-import Modal from '../modal'
-import ImageUpload from '../image-upload'
+import Input from "../input"
+import Modal from "../modal"
+import ImageUpload from "../image-upload"
 
 export default function EditModal() {
    const { data: currentUser } = useCurrentUser()
    const { mutate: mutateFetchedUser } = useUser(currentUser?.id)
    const editModal = useEditModal()
 
-   const [profileImage, setProfileImage] = useState('')
-   const [coverImage, setCoverImage] = useState('')
-   const [name, setName] = useState('')
-   const [username, setUsername] = useState('')
-   const [bio, setBio] = useState('')
+   const [profileImage, setProfileImage] = useState("")
+   const [coverImage, setCoverImage] = useState("")
+   const [name, setName] = useState("")
+   const [username, setUsername] = useState("")
+   const [bio, setBio] = useState("")
 
    useEffect(() => {
       setProfileImage(currentUser?.profileImage)
@@ -27,63 +27,52 @@ export default function EditModal() {
       setName(currentUser?.name)
       setUsername(currentUser?.username)
       setBio(currentUser?.bio)
-   }, [
-      currentUser?.name,
-      currentUser?.username,
-      currentUser?.bio,
-      currentUser?.profileImage,
-      currentUser?.coverImage,
-   ])
+   }, [currentUser?.name, currentUser?.username, currentUser?.bio, currentUser?.profileImage, currentUser?.coverImage])
 
    const [isLoading, setIsLoading] = useState(false)
 
    const onSubmit = useCallback(async () => {
       try {
          setIsLoading(true)
-         await axios.patch('/api/edit', { name, username, bio, profileImage, coverImage })
+         await axios.patch("/api/edit", { name, username, bio, profileImage, coverImage })
          mutateFetchedUser()
 
-         toast.success('Updated')
+         toast.success("Updated")
          editModal.onClose()
       } catch (error) {
-         toast.error('Something went wrong')
+         toast.error("Something went wrong")
       } finally {
          setIsLoading(false)
       }
    }, [editModal, name, username, bio, mutateFetchedUser, profileImage, coverImage])
 
    const bodyContent = (
-      <div className='flex flex-col gap-4'>
+      <div className="flex flex-col gap-4">
          <ImageUpload
             value={profileImage}
             disabled={isLoading}
             onChange={(image) => setProfileImage(image)}
-            label='Upload profile image'
+            label="Upload profile image"
          />
          <ImageUpload
             value={coverImage}
             disabled={isLoading}
             onChange={(image) => setCoverImage(image)}
-            label='Upload cover image'
+            label="Upload cover image"
          />
          <Input
-            placeholder='Name'
+            placeholder="Name"
             onChange={(event) => setName(event.target.value)}
             value={name}
             disabled={isLoading}
          />
          <Input
-            placeholder='Username'
+            placeholder="Username"
             onChange={(event) => setUsername(event.target.value)}
             value={username}
             disabled={isLoading}
          />
-         <Input
-            placeholder='Bio'
-            onChange={(event) => setBio(event.target.value)}
-            value={bio}
-            disabled={isLoading}
-         />
+         <Input placeholder="Bio" onChange={(event) => setBio(event.target.value)} value={bio} disabled={isLoading} />
       </div>
    )
 
@@ -93,8 +82,8 @@ export default function EditModal() {
          onClose={editModal.onClose}
          onSubmit={onSubmit}
          disabled={isLoading}
-         title='Edit your profile'
-         actionLabel='Save'
+         title="Edit your profile"
+         actionLabel="Save"
          body={bodyContent}
       />
    )

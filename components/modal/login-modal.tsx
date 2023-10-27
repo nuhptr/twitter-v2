@@ -1,30 +1,30 @@
-import { signIn } from 'next-auth/react'
-import { useCallback, useState } from 'react'
-import { toast } from 'react-hot-toast'
+import { signIn } from "next-auth/react"
+import { useCallback, useState } from "react"
+import { toast } from "react-hot-toast"
 
-import useLoginModal from '@/hooks/use-login-modal'
-import useRegisterModal from '@/hooks/use-register-modal'
+import useLoginModal from "@/hooks/use-login-modal"
+import useRegisterModal from "@/hooks/use-register-modal"
 
-import Input from '../input'
-import Modal from '../modal'
+import Input from "../input"
+import Modal from "../modal"
 
 export default function LoginModal() {
    const loginModal = useLoginModal()
    const registerModal = useRegisterModal()
 
-   const [email, setEmail] = useState('')
-   const [password, setPassword] = useState('')
+   const [email, setEmail] = useState("")
+   const [password, setPassword] = useState("")
    const [isLoading, setIsLoading] = useState(false)
 
    const onSubmit = useCallback(async () => {
       try {
          setIsLoading(true)
-         await signIn('credentials', { email, password })
-         toast.success('Logged in')
+         await signIn("credentials", { email, password })
+         toast.success("Logged in")
 
          loginModal.onClose()
       } catch (error) {
-         toast.error('Something went wrong')
+         toast.error("Something went wrong")
       } finally {
          setIsLoading(false)
       }
@@ -36,16 +36,11 @@ export default function LoginModal() {
    }, [loginModal, registerModal])
 
    const bodyContent = (
-      <div className='flex flex-col gap-4'>
+      <div className="flex flex-col gap-4">
+         <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} disabled={isLoading} />
          <Input
-            placeholder='Email'
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            disabled={isLoading}
-         />
-         <Input
-            placeholder='Password'
-            type='password'
+            placeholder="Password"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             disabled={isLoading}
@@ -54,11 +49,11 @@ export default function LoginModal() {
    )
 
    const footerContent = (
-      <div className='mt-4 text-center text-neutral-400'>
+      <div className="mt-4 text-center text-neutral-400">
          <p>
             First time using Twitter?
-            <span onClick={onToggle} className='text-white cursor-pointer hover:underline'>
-               {' '}
+            <span onClick={onToggle} className="text-white cursor-pointer hover:underline">
+               {" "}
                Create an account
             </span>
          </p>
@@ -69,8 +64,8 @@ export default function LoginModal() {
       <Modal
          disabled={isLoading}
          isOpen={loginModal.isOpen}
-         title='Login'
-         actionLabel='Sign in'
+         title="Login"
+         actionLabel="Sign in"
          onClose={loginModal.onClose}
          onSubmit={onSubmit}
          body={bodyContent}

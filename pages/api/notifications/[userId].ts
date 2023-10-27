@@ -1,17 +1,17 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from "next"
 
-import prisma from '@/helpers/prismadb'
+import prisma from "@/helpers/prismadb"
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
-   if (request.method !== 'GET') return response.status(405).end()
+   if (request.method !== "GET") return response.status(405).end()
 
    try {
       const { userId } = request.query
-      if (!userId || typeof userId !== 'string') throw new Error('Invalid ID')
+      if (!userId || typeof userId !== "string") throw new Error("Invalid ID")
 
       const notifications = await prisma.notification.findMany({
          where: { userId },
-         orderBy: { createdAt: 'desc' },
+         orderBy: { createdAt: "desc" },
       })
 
       await prisma.user.update({ where: { id: userId }, data: { hasNotification: false } })

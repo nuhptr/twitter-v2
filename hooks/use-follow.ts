@@ -1,10 +1,10 @@
-import axios from 'axios'
-import { useCallback, useMemo } from 'react'
-import { toast } from 'react-hot-toast'
+import axios from "axios"
+import { useCallback, useMemo } from "react"
+import { toast } from "react-hot-toast"
 
-import useCurrentUser from './use-current-user'
-import useLoginModal from './use-login-modal'
-import useUser from './use-user'
+import useCurrentUser from "./use-current-user"
+import useLoginModal from "./use-login-modal"
+import useUser from "./use-user"
 
 export default function useFollow(userId: string) {
    const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser()
@@ -24,16 +24,16 @@ export default function useFollow(userId: string) {
       try {
          let request
 
-         if (isFollowing) request = () => axios.delete('/api/follow', { data: { userId } })
-         else request = () => axios.post('/api/follow', { userId })
+         if (isFollowing) request = () => axios.delete("/api/follow", { data: { userId } })
+         else request = () => axios.post("/api/follow", { userId })
 
          await request()
          mutateCurrentUser()
          mutateFetchedUser()
 
-         toast.success('Success')
+         toast.success("Success")
       } catch (error) {
-         toast.error('Something went wrong')
+         toast.error("Something went wrong")
       }
    }, [currentUser, isFollowing, userId, mutateCurrentUser, mutateFetchedUser, loginModal])
 

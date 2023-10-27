@@ -1,27 +1,27 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from "next"
 
-import serverAuth from '@/helpers/server-auth'
-import prisma from '@/helpers/prismadb'
+import serverAuth from "@/helpers/server-auth"
+import prisma from "@/helpers/prismadb"
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
-   if (request.method !== 'POST' && request.method !== 'DELETE') return response.status(405).end()
+   if (request.method !== "POST" && request.method !== "DELETE") return response.status(405).end()
 
    try {
       const currentUser = await serverAuth(request, response)
       const { userId } = request.body
-      if (!userId || typeof userId !== 'string') throw new Error('Invalid User ID')
+      if (!userId || typeof userId !== "string") throw new Error("Invalid User ID")
 
       const user = await prisma.user.findUnique({ where: { id: userId } })
-      if (!user) throw new Error('User Not Found')
+      if (!user) throw new Error("User Not Found")
 
       let updatedFollowingIds = [...(user.followingIds || [])]
 
-      if (request.method === 'POST') {
+      if (request.method === "POST") {
          updatedFollowingIds.push(currentUser.id)
 
          // notification to user
          try {
-            await prisma.notification.create({ data: { body: 'Someone followed you!', userId } })
+            await prisma.notification.create({ data: { body: "Someone followed you!", userId } })
             await prisma.user.update({ where: { id: userId }, data: { hasNotification: true } })
          } catch (error: any) {
             console.error(error)
@@ -29,7 +29,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
          // end notification
       }
 
-      if (request.method === 'DELETE') {
+      if (request.method === "DELETE") {
          updatedFollowingIds = updatedFollowingIds.filter((followingId) => followingId !== userId)
       }
 

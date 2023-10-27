@@ -1,10 +1,10 @@
-import bcrypt from 'bcrypt'
-import { NextApiRequest, NextApiResponse } from 'next'
+import bcrypt from "bcrypt"
+import { NextApiRequest, NextApiResponse } from "next"
 
-import prisma from '@/helpers/prismadb'
+import prisma from "@/helpers/prismadb"
 
 export default async function hadnler(request: NextApiRequest, response: NextApiResponse) {
-   if (request.method !== 'POST') return response.status(405).end()
+   if (request.method !== "POST") return response.status(405).end()
 
    try {
       const { email, username, name, password } = request.body

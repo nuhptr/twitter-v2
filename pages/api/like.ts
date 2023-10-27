@@ -1,22 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from "next"
 
-import serverAuth from '@/helpers/server-auth'
-import prisma from '@/helpers/prismadb'
+import serverAuth from "@/helpers/server-auth"
+import prisma from "@/helpers/prismadb"
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
-   if (request.method !== 'POST' && request.method !== 'DELETE') return response.status(405).end()
+   if (request.method !== "POST" && request.method !== "DELETE") return response.status(405).end()
 
    try {
       const currentUser = await serverAuth(request, response)
       const { postId } = request.body
-      if (!postId || typeof postId !== 'string') throw new Error('Invalid Post ID')
+      if (!postId || typeof postId !== "string") throw new Error("Invalid Post ID")
 
       const post = await prisma.post.findUnique({ where: { id: postId } })
-      if (!post) throw new Error('Post Not Found')
+      if (!post) throw new Error("Post Not Found")
 
       let updatedLikeIds = [...(post.likedIds || [])]
 
-      if (request.method === 'POST') {
+      if (request.method === "POST") {
          updatedLikeIds.push(currentUser.id)
 
          // TODO: Send notification to post author
@@ -25,7 +25,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
             if (post?.userId) {
                await prisma.notification.create({
-                  data: { body: 'Someone liked your post!', userId: post.userId },
+                  data: { body: "Someone liked your post!", userId: post.userId },
                })
 
                await prisma.user.update({ where: { id: post.userId }, data: { hasNotification: true } })
@@ -35,7 +35,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
          }
       }
 
-      if (request.method === 'DELETE') {
+      if (request.method === "DELETE") {
          updatedLikeIds = updatedLikeIds.filter((likeId) => likeId !== currentUser.id)
       }
 

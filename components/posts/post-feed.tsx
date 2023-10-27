@@ -1,6 +1,6 @@
-import usePosts from '@/hooks/use-posts'
+import usePosts from "@/hooks/use-posts"
 
-import PostItem from './post-item'
+import PostItem from "./post-item"
 
 export default function PostFeed({ userId }: { userId?: string }) {
    const { data: posts = [] } = usePosts(userId)

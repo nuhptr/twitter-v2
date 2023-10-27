@@ -1,4 +1,4 @@
-import CommentItem from './comment-item'
+import CommentItem from "./comment-item"
 
 export default function CommentFeed({ comments = [] }: { comments?: Record<string, any>[] }) {
    return (

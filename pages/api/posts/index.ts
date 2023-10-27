@@ -1,13 +1,13 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from "next"
 
-import serverAuth from '@/helpers/server-auth'
-import prisma from '@/helpers/prismadb'
+import serverAuth from "@/helpers/server-auth"
+import prisma from "@/helpers/prismadb"
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
-   if (request.method !== 'POST' && request.method !== 'GET') return response.status(405).end()
+   if (request.method !== "POST" && request.method !== "GET") return response.status(405).end()
 
    try {
-      if (request.method === 'POST') {
+      if (request.method === "POST") {
          const currentUser = await serverAuth(request, response)
          const { body } = request.body
 
@@ -16,21 +16,21 @@ export default async function handler(request: NextApiRequest, response: NextApi
          return response.status(200).json(post)
       }
 
-      if (request.method === 'GET') {
+      if (request.method === "GET") {
          const { userId } = request.query
 
          let posts
 
-         if (userId && typeof userId === 'string') {
+         if (userId && typeof userId === "string") {
             posts = await prisma.post.findMany({
                where: { userId },
                include: { user: true, comments: true },
-               orderBy: { createdAt: 'desc' },
+               orderBy: { createdAt: "desc" },
             })
          } else {
             posts = await prisma.post.findMany({
                include: { user: true, comments: true },
-               orderBy: { createdAt: 'desc' },
+               orderBy: { createdAt: "desc" },
             })
          }
 

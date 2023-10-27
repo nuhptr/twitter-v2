@@ -1,11 +1,11 @@
-import axios from 'axios'
-import { useCallback, useMemo } from 'react'
-import { toast } from 'react-hot-toast'
+import axios from "axios"
+import { useCallback, useMemo } from "react"
+import { toast } from "react-hot-toast"
 
-import useCurrentUser from './use-current-user'
-import useLoginModal from './use-login-modal'
-import usePost from './use-post'
-import usePosts from './use-posts'
+import useCurrentUser from "./use-current-user"
+import useLoginModal from "./use-login-modal"
+import usePost from "./use-post"
+import usePosts from "./use-posts"
 
 export default function useLike({ postId, userId }: { postId: string; userId?: string }) {
    const { data: currentUser } = useCurrentUser()
@@ -26,16 +26,16 @@ export default function useLike({ postId, userId }: { postId: string; userId?: s
       try {
          let request
 
-         if (hasLiked) request = () => axios.delete('/api/like', { data: { postId } })
-         else request = () => axios.post('/api/like', { postId })
+         if (hasLiked) request = () => axios.delete("/api/like", { data: { postId } })
+         else request = () => axios.post("/api/like", { postId })
 
          await request()
          mutateFetchedPost()
          mutateFetchedPosts()
 
-         toast.success('Success')
+         toast.success("Success")
       } catch (error) {
-         toast.error('Something went wrong')
+         toast.error("Something went wrong")
       }
    }, [currentUser, hasLiked, postId, mutateFetchedPosts, mutateFetchedPost, loginModal])
 
